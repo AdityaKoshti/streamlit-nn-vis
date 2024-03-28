@@ -374,15 +374,18 @@ def main():
             num_functions= st.slider("Number of output dimensions (function components)", min_value=1, max_value=10, value=2, step=1)
             num_rows = st.slider("Number of data samples ", min_value=1000, max_value=10000, value=1000, step=100)
             
-        
         elif data_choice == 'Type-in functions manually':
-            num_axes = st.slider("Number of input dimensions (axes)", min_value=2, max_value=10, value=3, step=1)
-            num_functions= st.slider("Number of output dimensions (function components)", min_value=2, max_value=10, value=3, step=1)
-            num_rows = st.slider("Number of data samples", min_value=1000, max_value=10000, value=1000, step=100)
+            st.warning("This feature is not available yet. Please select 'Generate synthetic data and functions' option.")
+            return 
+        # elif data_choice == 'Type-in functions manually':
+        #     num_axes = st.slider("Number of input dimensions (axes)", min_value=2, max_value=10, value=3, step=1)
+        #     num_functions= st.slider("Number of output dimensions (function components)", min_value=2, max_value=10, value=3, step=1)
+        #     num_rows = st.slider("Number of data samples", min_value=1000, max_value=10000, value=1000, step=100)
             
 
     with c2:
         
+        st.info("Click on the Re-Generate button to generate new functions after changing the adjacent parameters.")
         state_button = st.button(('Re-Generate!' if 'data_generated' in st.session_state else 'Generate!'))
         if state_button:
             st.session_state.data_generated = False
