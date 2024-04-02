@@ -343,10 +343,10 @@ def main():
     
     c1, c2 = st.columns([20,80])
     with c2:
-        st.title("Multi-Dimentional Neural Network Visualizer")
-        st.caption("A simple tool to visualize neural-network over multidimentional input/output")
-        st.markdown("""
-        The Multi-dimensional Neural Network Visualizer is a tool designed to help users understand and analyze the behavior of neural networks in multi-dimensional spaces. It provides an interactive interface to visualize the structure of neural networks, input-output relationships, and model performance metrics.
+        st.title("NeuroTune Regression Explorer")
+        st.caption("Explore Neural Network Regression: Hyperparameter Tuning with multidimentional visualization of input-output space.")
+        st.warning("""
+        "NeuroTune Regression Explorer" is an interactive Streamlit application designed to demystify the hyperparameter tuning process for neural network regression tasks. By generating high-dimensional analytical functions and approximating them with neural networks using a limited number of training points, users can witness real-time adjustments in the approximation surface. 
         """
         )
     with c1:
@@ -385,7 +385,7 @@ def main():
 
     with c2:
         
-        st.info("Click on the Re-Generate button to generate new functions after changing the adjacent parameters.")
+        st.warning("Click on the Re-Generate button to generate new functions after changing the adjacent parameters.")
         state_button = st.button(('Re-Generate!' if 'data_generated' in st.session_state else 'Generate!'))
         if state_button:
             st.session_state.data_generated = False
@@ -468,7 +468,19 @@ def main():
     lower = -10
     higher = 10
 
-    
+
+    if 'data' in st.session_state:
+        # check if all input parameters match with the st.session_state.data
+        selected_columns = [f"x{i+1}" for i in range(input_size)]
+        if not all([col in st.session_state.data.columns for col in selected_columns]):
+            st.error("Input columns do not match with the generated data columns")
+            return
+        if not all([f"f{i+1}" in st.session_state.data.columns for i in range(output_size)]):
+            st.error("Output columns do not match with the generated data columns")
+            return
+        if len(st.session_state.data) != num_points:
+            st.error("Number of data points do not match with the generated data")
+            return
 
     ###############################################
     # Train the neural network on the function data
@@ -573,7 +585,7 @@ def main():
     # Finding goodness of fit
     st.markdown("""---""")
     st.header("Goodness of Fit")
-    st.info("Goodness of fit is a measure of how well the predicted values match the actual values. It is a measure of how well the model fits the data.")
+    st.info("R-squared is like a measure of how well your line explains the ups and downs of your data points on a graph. The closer it is to 1, the better job your line does at explaining those ups and downs.")
 
 
     if 'data' not in st.session_state:
