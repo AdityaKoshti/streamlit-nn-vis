@@ -1,6 +1,6 @@
-# Streamlit App with Neural Network Model
+# NeuroTune Regression Explorer
 
-This repository contains a Streamlit web application that utilizes a neural network model for some purpose (e.g., image classification, text generation, etc.). The application is run using the `NN_streamlit.py` file and requires certain dependencies specified in the `requirements.txt` file.
+"NeuroTune Regression Explorer" is an interactive Streamlit application designed to demystify the hyperparameter tuning process for neural network regression tasks. By generating high-dimensional analytical functions and approximating them with neural networks using a limited number of training points, users can witness real-time adjustments in the approximation surface.
 
 ## Usage
 
